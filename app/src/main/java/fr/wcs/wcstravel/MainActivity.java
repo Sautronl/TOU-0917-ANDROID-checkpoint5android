@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 aeroDes.setEnabled(true);
                 aeroDes.setEnabled(true);
 
+
                 switch (i){
                     case 1:
                         resultAeroDes = "BOS";
@@ -226,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
                                     && mTravel.getTravel().contains(resultAeroDep) && mTravel.getTravel().contains(resultAeroDes)){
                                 travelList.add(mTravel);
                                 Log.d(TAG, "onDataChange: "+ travelList.size());
-                                mPrice = Double.parseDouble(mTravel.getPrice());
+                                //mPrice = Double.parseDouble(mTravel.getPrice());
                             }
                         }
                         TravelAdapter travelAdapter = new TravelAdapter(travelList,MainActivity.this);
@@ -247,8 +248,9 @@ public class MainActivity extends AppCompatActivity {
         Double eurDoll = 0.810628967;
         Double dollEuro = 1.2366;
         Double resultat;
+        String lower = init.toLowerCase();
 
-        if (init.equals("EUR")){
+        if (lower.equals("eur")){
             resultat = prix * eurDoll;
         }else{
             resultat = prix * dollEuro;

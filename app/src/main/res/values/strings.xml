@@ -2,5 +2,5 @@
     <string name="app_name">WCSTravel</string>
     <string name="valider">Valider</string>
     <string name="convertir">Convertir</string>
-    <string name="erreur">EUR ou USD (en maj stp)</string>
+    <string name="erreur">EUR ou USD (en MAJ ou MIN)</string>
 </resources>
