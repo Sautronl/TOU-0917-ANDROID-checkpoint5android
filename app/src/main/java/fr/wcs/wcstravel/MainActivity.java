@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                         if (travelList.size()>0){travelList.clear();}
                         for (DataSnapshot data: dataSnapshot.getChildren()){
                             mTravel = data.getValue(TravelModel.class);
-                            if (mTravel.getDeparture_date().equals(dateStringA)){
+                            if (mTravel.getDeparture_date().equals(dateStringA) && mTravel.getReturn_date().equals(dateStringB)){
                                 travelList.add(mTravel);
                             }
                         }

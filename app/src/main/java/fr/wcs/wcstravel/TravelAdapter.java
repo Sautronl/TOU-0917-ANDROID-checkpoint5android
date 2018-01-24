@@ -1,6 +1,7 @@
 package fr.wcs.wcstravel;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -55,16 +56,17 @@ public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.ViewHolder
 //            resultDateDes = itemView.findViewById(R.id.resultDateDes);
 //            resultPrice = itemView.findViewById(R.id.resultPrice);
         }
-        public void display(final TravelModel mTravel){
+        public void display(final TravelModel travlWorld){
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Intent i = new Intent(activity,ListActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putParcelable("info",mTravel);
-
+                    bundle.putParcelable("info",travlWorld);
+                    activity.startActivity(i);
                 }
             });
-            resultComp.setText(mTravel.getAirline());
+            resultComp.setText(travlWorld.getAirline());
         }
     }
 }
