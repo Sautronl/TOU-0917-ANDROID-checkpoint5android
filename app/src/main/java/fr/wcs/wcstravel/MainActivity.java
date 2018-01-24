@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Switch;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,9 +29,11 @@ import fr.wcs.wcstravel.Model.TravelModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText aeroDep,aeroDes, dateDep,dateDes;
+    EditText  dateDep,dateDes;
+    Spinner aeroDep,aeroDes;
     Button mValid;
-    String resultAeroDep,resultAeroDes,dateStringA,dateStringB,key;
+    String dateStringA,dateStringB,key;
+    String resultAeroDep,resultAeroDes;
     private TravelModel mTravel = null;
     private RecyclerView recyclerView;
     private ArrayList<TravelModel>  travelList = new ArrayList<>();
@@ -40,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        aeroDep = findViewById(R.id.aeroDep);
-        aeroDes = findViewById(R.id.aeroDes);
+        aeroDep = findViewById(R.id.departure);
+        aeroDes = findViewById(R.id.destination);
         dateDep =(EditText) findViewById(R.id.date);
         dateDes =(EditText) findViewById(R.id.dateReturn);
         mValid = findViewById(R.id.valider);
@@ -52,8 +58,77 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
-        resultAeroDep = aeroDep.getText().toString();
-        resultAeroDes = aeroDes.getText().toString();
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.model_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        aeroDep.setAdapter(adapter);
+
+        aeroDep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                aeroDep.setEnabled(true);
+                aeroDep.setEnabled(true);
+
+                switch (i){
+                    case 1:
+                        resultAeroDep = "BOS";
+                        break;
+                    case 2:
+                        resultAeroDep = "LAX";
+                        break;
+                    case 3:
+                        resultAeroDep = "MIA";
+                        break;
+                    case 4:
+                        resultAeroDep = "NYC";
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        final ArrayAdapter<CharSequence> adapterReturn = ArrayAdapter.createFromResource(this,
+                R.array.model_return, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        aeroDes.setAdapter(adapterReturn);
+
+        aeroDes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                aeroDes.setEnabled(true);
+                aeroDes.setEnabled(true);
+
+                switch (i){
+                    case 1:
+                        resultAeroDes = "BOS";
+                        break;
+                    case 2:
+                        resultAeroDes= "LAX";
+                        break;
+                    case 3:
+                        resultAeroDes = "MIA";
+                        break;
+                    case 4:
+                        resultAeroDes = "NYC";
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         dateDep.setFocusable(false);
         final Calendar myCalendar = Calendar.getInstance();
@@ -120,21 +195,21 @@ public class MainActivity extends AppCompatActivity {
         mValid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                resultAeroDep = aeroDep.getText().toString();
-                resultAeroDes = aeroDes.getText().toString();
+
                 mRef.child("/checkpoint5/travels/").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (travelList.size()>0){travelList.clear();}
                         for (DataSnapshot data: dataSnapshot.getChildren()){
                             mTravel = data.getValue(TravelModel.class);
-                            if (mTravel.getDeparture_date().equals(dateStringA) && mTravel.getReturn_date().equals(dateStringB)){
+                            if (mTravel.getDeparture_date().equals(dateStringA) && mTravel.getReturn_date().equals(dateStringB)
+                                    && mTravel.getTravel().contains(resultAeroDep) && mTravel.getTravel().contains(resultAeroDes)){
                                 travelList.add(mTravel);
-                                key = data.getKey();
-                                keyList.add(key);
+//                                key = data.getKey();
+//                                keyList.add(key);
                             }
                         }
-                        TravelAdapter travelAdapter = new TravelAdapter(travelList,MainActivity.this,keyList);
+                        TravelAdapter travelAdapter = new TravelAdapter(travelList,MainActivity.this);
                         recyclerView.setAdapter(travelAdapter);
                     }
 

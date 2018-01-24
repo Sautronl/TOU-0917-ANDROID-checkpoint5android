@@ -17,12 +17,12 @@ public class TravelModel implements Parcelable{
     public TravelModel(){
     }
 
-    public TravelModel(String airline, String travel, String departure_date, String return_date, String price) {
+    public TravelModel(String airline, String departure_date, String return_date, String price, String travel) {
         this.airline = airline;
-        this.travel = travel;
         this.departure_date = departure_date;
         this.return_date = return_date;
         this.price = price;
+        this.travel = travel;
     }
 
     public String getAirline() {
@@ -85,18 +85,18 @@ public class TravelModel implements Parcelable{
 
     protected TravelModel(Parcel in) {
         airline = in.readString();
-        travel = in.readString();
         departure_date = in.readString();
         return_date = in.readString();
         price = in.readString();
+        travel = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(airline);
-        parcel.writeString(travel);
         parcel.writeString(departure_date);
         parcel.writeString(return_date);
         parcel.writeString(price);
+        parcel.writeString(travel);
     }
 }

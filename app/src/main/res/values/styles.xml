@@ -8,4 +8,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <string-array name="model_array">
+        <item>Sélectionnez un vol aller ...</item>
+        <item>Boston</item>
+        <item>Los Angeles</item>
+        <item>Miami</item>
+        <item>New York</item>
+
+    </string-array>
+
+    <string-array name="model_return">
+        <item>Sélectionnez un vol retour ...</item>
+        <item>Boston</item>
+        <item>Los Angeles</item>
+        <item>Miami</item>
+        <item>New York</item>
+
+    </string-array>
+
 </resources>

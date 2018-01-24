@@ -15,4 +15,35 @@
         android:layout_marginTop="20dp"
          />
 
+    <TextView
+        android:id="@+id/resultDateDep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/resultCompList"
+        android:layout_marginTop="26dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="33dp" />
+
+    <TextView
+        android:id="@+id/resultDateDes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/resultDateDep"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="45dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="63dp" />
+
+    <TextView
+        android:id="@+id/resultPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/resultDateDes"
+        android:layout_below="@+id/resultDateDes"
+        android:layout_marginTop="39dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="94dp" />
+
 </RelativeLayout>

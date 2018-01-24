@@ -23,13 +23,13 @@ import fr.wcs.wcstravel.Model.TravelModel;
 
 public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.ViewHolder> {
     private List<TravelModel> mTravel;
-    private Activity activity;
-    private ArrayList<String> key;
+     Activity activity;
+    //private ArrayList<String> key;
 
-    public TravelAdapter(List<TravelModel> mTravel, Activity activity,ArrayList<String> key){
+    public TravelAdapter(List<TravelModel> mTravel, Activity activity){
         this.mTravel = mTravel;
         this.activity = activity;
-        this.key = key;
+       // this.key = key;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(TravelAdapter.ViewHolder holder, int position) {
-        holder.display(mTravel.get(position),key);
+        holder.display(mTravel.get(position));
     }
 
     @Override
@@ -51,30 +51,33 @@ public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView resultComp;
-//        TextView resultDateDep;
-//        TextView resultDateDes;
-//        TextView resultPrice;
+        TextView resultDateDep;
+        TextView resultDateDes;
+        TextView resultPrice;
 
         public ViewHolder(View itemView) {
             super(itemView);
             resultComp = itemView.findViewById(R.id.resultComp);
-//            resultDateDep = itemView.findViewById(R.id.resultDateDep);
-//            resultDateDes = itemView.findViewById(R.id.resultDateDes);
-//            resultPrice = itemView.findViewById(R.id.resultPrice);
+            resultDateDep = itemView.findViewById(R.id.resultDateDep);
+            resultDateDes = itemView.findViewById(R.id.resultDateDes);
+            resultPrice = itemView.findViewById(R.id.resultPrice);
         }
-        public void display(final TravelModel travlWorld,final ArrayList<String> key){
+        public void display(final TravelModel travlWorld){
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(activity,ListActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("info",travlWorld);
-                    bundle.putStringArrayList("key",key);
-                    activity.startActivity(i);
-                }
-            });
-            resultComp.setText(travlWorld.getAirline());
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent i = new Intent(activity,ListActivity.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putParcelable("info",travlWorld);
+//                    //bundle.putStringArrayList("key",key);
+//                    activity.startActivity(i);
+//                }
+//            });
+            resultComp.setText(travlWorld.getTravel());
+            resultDateDep.setText(travlWorld.getDeparture_date());
+            resultDateDes.setText(travlWorld.getReturn_date());
+            resultPrice.setText(travlWorld.getPrice());
         }
     }
 }
