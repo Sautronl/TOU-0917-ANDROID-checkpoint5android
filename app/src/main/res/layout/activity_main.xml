@@ -90,7 +90,7 @@
         android:layout_alignBottom="@+id/monnaie"
         android:layout_marginStart="26dp"
         android:layout_toEndOf="@+id/monnaie"
-        android:text="convertir" />
+        android:text="@string/convertir" />
 
     <Button
         android:id="@+id/valider"
@@ -99,7 +99,7 @@
         android:layout_alignBaseline="@+id/conv"
         android:layout_alignBottom="@+id/conv"
         android:layout_alignEnd="@+id/dateDes"
-        android:text="Valider" />
+        android:text="@string/valider" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

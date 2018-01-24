@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
     EditText  dateDep,dateDes,conv,monnaie;
     Spinner aeroDep,aeroDes;
     Button mValid,convertButton;
-    String dateStringA,dateStringB,key;
+    String dateStringA,dateStringB;
     String resultAeroDep,resultAeroDes;
     Double mPrice;
+    private static String TAG = "MainAct";
     private TravelModel mTravel = null;
     private RecyclerView recyclerView;
     private ArrayList<TravelModel>  travelList = new ArrayList<>();
-    private ArrayList<String> keyList = new ArrayList<>();
     private FirebaseDatabase mFire;
     private DatabaseReference mRef;
 
@@ -202,9 +203,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String priceEdit = conv.getText().toString();
                 String monnaieEdit = monnaie.getText().toString();
-                Double prixDouble = Double.parseDouble(priceEdit);
-                convert(prixDouble,monnaieEdit);
-                Toast.makeText(MainActivity.this, convert(prixDouble,monnaieEdit), Toast.LENGTH_SHORT).show();
+                if (priceEdit.isEmpty() || monnaieEdit.isEmpty()){
+                    Toast.makeText(MainActivity.this, R.string.erreur, Toast.LENGTH_SHORT).show();
+                }else{
+                    Double prixDouble = Double.parseDouble(priceEdit);
+                    Toast.makeText(MainActivity.this, convert(prixDouble,monnaieEdit), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -221,14 +225,12 @@ public class MainActivity extends AppCompatActivity {
                             if (mTravel.getDeparture_date().equals(dateStringA) && mTravel.getReturn_date().equals(dateStringB)
                                     && mTravel.getTravel().contains(resultAeroDep) && mTravel.getTravel().contains(resultAeroDes)){
                                 travelList.add(mTravel);
+                                Log.d(TAG, "onDataChange: "+ travelList.size());
                                 mPrice = Double.parseDouble(mTravel.getPrice());
-//                                key = data.getKey();
-//                                keyList.add(key);
                             }
                         }
                         TravelAdapter travelAdapter = new TravelAdapter(travelList,MainActivity.this);
                         recyclerView.setAdapter(travelAdapter);
-
                     }
 
                     @Override

@@ -24,12 +24,10 @@ import fr.wcs.wcstravel.Model.TravelModel;
 public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.ViewHolder> {
     private List<TravelModel> mTravel;
      Activity activity;
-    //private ArrayList<String> key;
 
     public TravelAdapter(List<TravelModel> mTravel, Activity activity){
         this.mTravel = mTravel;
         this.activity = activity;
-       // this.key = key;
     }
 
     @Override
@@ -64,16 +62,6 @@ public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.ViewHolder
         }
         public void display(final TravelModel travlWorld){
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent i = new Intent(activity,ListActivity.class);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putParcelable("info",travlWorld);
-//                    //bundle.putStringArrayList("key",key);
-//                    activity.startActivity(i);
-//                }
-//            });
             resultComp.setText(travlWorld.getAirline());
             resultDateDep.setText(travlWorld.getDeparture_date());
             resultDateDes.setText(travlWorld.getReturn_date());
