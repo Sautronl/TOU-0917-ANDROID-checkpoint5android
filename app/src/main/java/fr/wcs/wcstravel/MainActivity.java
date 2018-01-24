@@ -27,10 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
     EditText aeroDep,aeroDes, dateDep,dateDes;
     Button mValid;
-    String resultAeroDep,resultAeroDes,dateStringA,dateStringB;
+    String resultAeroDep,resultAeroDes,dateStringA,dateStringB,key;
     private TravelModel mTravel = null;
     private RecyclerView recyclerView;
     private ArrayList<TravelModel>  travelList = new ArrayList<>();
+    private ArrayList<String> keyList = new ArrayList<>();
     private FirebaseDatabase mFire;
     private DatabaseReference mRef;
 
@@ -129,9 +130,11 @@ public class MainActivity extends AppCompatActivity {
                             mTravel = data.getValue(TravelModel.class);
                             if (mTravel.getDeparture_date().equals(dateStringA) && mTravel.getReturn_date().equals(dateStringB)){
                                 travelList.add(mTravel);
+                                key = data.getKey();
+                                keyList.add(key);
                             }
                         }
-                        TravelAdapter travelAdapter = new TravelAdapter(travelList,MainActivity.this);
+                        TravelAdapter travelAdapter = new TravelAdapter(travelList,MainActivity.this,keyList);
                         recyclerView.setAdapter(travelAdapter);
                     }
 

@@ -1,5 +1,6 @@
 package fr.wcs.wcstravel;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,16 +32,29 @@ public class ListActivity extends AppCompatActivity {
         resultDateDes = findViewById(R.id.resultDateDes);
         resultPrice = findViewById(R.id.resultPrice);
 
+        Intent bundle = this.getIntent();
+        mTrav = bundle.getParcelableExtra("info");
+
+        Intent bun = this.getIntent();
+        String key = bun.getStringExtra("key");
+
         mFire = FirebaseDatabase.getInstance();
-        mRef = mFire.getReference("checkpoint5/travels/");
+        mRef = mFire.getReference("checkpoint5/travels/"+key);
 
-        mTrav = this.getIntent().getParcelableExtra("info");
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mTrav = dataSnapshot.getValue(TravelModel.class);
+                resultCompList.setText(mTrav.getAirline());
+                resultDateDes.setText(mTrav.getDeparture_date());
+                resultDateDep.setText(mTrav.getReturn_date());
+                resultPrice.setText(mTrav.getPrice());
+            }
 
-        if (mTrav !=null) {
-            resultCompList.setText(mTrav.getAirline());
-            resultDateDes.setText(mTrav.getDeparture_date());
-            resultDateDep.setText(mTrav.getReturn_date());
-            resultPrice.setText(mTrav.getPrice());
-        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

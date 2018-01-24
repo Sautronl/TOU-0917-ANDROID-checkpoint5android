@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.wcs.wcstravel.Model.TravelModel;
@@ -20,10 +24,12 @@ import fr.wcs.wcstravel.Model.TravelModel;
 public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.ViewHolder> {
     private List<TravelModel> mTravel;
     private Activity activity;
+    private ArrayList<String> key;
 
-    public TravelAdapter(List<TravelModel> mTravel, Activity activity){
+    public TravelAdapter(List<TravelModel> mTravel, Activity activity,ArrayList<String> key){
         this.mTravel = mTravel;
         this.activity = activity;
+        this.key = key;
     }
 
     @Override
@@ -35,7 +41,7 @@ public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(TravelAdapter.ViewHolder holder, int position) {
-        holder.display(mTravel.get(position));
+        holder.display(mTravel.get(position),key);
     }
 
     @Override
@@ -56,13 +62,15 @@ public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.ViewHolder
 //            resultDateDes = itemView.findViewById(R.id.resultDateDes);
 //            resultPrice = itemView.findViewById(R.id.resultPrice);
         }
-        public void display(final TravelModel travlWorld){
+        public void display(final TravelModel travlWorld,final ArrayList<String> key){
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent i = new Intent(activity,ListActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("info",travlWorld);
+                    bundle.putStringArrayList("key",key);
                     activity.startActivity(i);
                 }
             });
