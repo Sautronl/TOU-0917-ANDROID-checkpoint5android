@@ -64,19 +64,47 @@
             android:inputType="date"
             android:maxLines="1" />
 
+
     </android.support.design.widget.TextInputLayout>
+
+    <EditText
+        android:id="@+id/conv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/dateDes"
+        android:layout_below="@+id/dateDes"
+        android:hint="prix" />
+
+    <EditText
+        android:id="@+id/monnaie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/dateDes"
+        android:layout_below="@+id/conv"
+        android:hint="EUR/USD" />
+
+    <Button
+        android:id="@+id/convertButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/monnaie"
+        android:layout_marginStart="26dp"
+        android:layout_toEndOf="@+id/monnaie"
+        android:text="convertir" />
 
     <Button
         android:id="@+id/valider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/dateDes"
-        android:layout_centerHorizontal="true"
-        android:text="Button" />
+        android:layout_alignBaseline="@+id/conv"
+        android:layout_alignBottom="@+id/conv"
+        android:layout_alignEnd="@+id/dateDes"
+        android:text="Valider" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
         android:layout_below="@id/valider"
         android:id="@+id/recycler"
         />

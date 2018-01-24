@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,11 +30,12 @@ import fr.wcs.wcstravel.Model.TravelModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText  dateDep,dateDes;
+    EditText  dateDep,dateDes,conv,monnaie;
     Spinner aeroDep,aeroDes;
-    Button mValid;
+    Button mValid,convertButton;
     String dateStringA,dateStringB,key;
     String resultAeroDep,resultAeroDes;
+    Double mPrice;
     private TravelModel mTravel = null;
     private RecyclerView recyclerView;
     private ArrayList<TravelModel>  travelList = new ArrayList<>();
@@ -50,7 +52,10 @@ public class MainActivity extends AppCompatActivity {
         aeroDes = findViewById(R.id.destination);
         dateDep =(EditText) findViewById(R.id.date);
         dateDes =(EditText) findViewById(R.id.dateReturn);
+        conv =(EditText) findViewById(R.id.conv);
+        monnaie =(EditText) findViewById(R.id.monnaie);
         mValid = findViewById(R.id.valider);
+        convertButton = findViewById(R.id.convertButton);
         recyclerView = findViewById(R.id.recycler);
 
         mFire = FirebaseDatabase.getInstance();
@@ -192,6 +197,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        convertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String priceEdit = conv.getText().toString();
+                String monnaieEdit = monnaie.getText().toString();
+                Double prixDouble = Double.parseDouble(priceEdit);
+                convert(prixDouble,monnaieEdit);
+                Toast.makeText(MainActivity.this, convert(prixDouble,monnaieEdit), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         mValid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -205,12 +221,14 @@ public class MainActivity extends AppCompatActivity {
                             if (mTravel.getDeparture_date().equals(dateStringA) && mTravel.getReturn_date().equals(dateStringB)
                                     && mTravel.getTravel().contains(resultAeroDep) && mTravel.getTravel().contains(resultAeroDes)){
                                 travelList.add(mTravel);
+                                mPrice = Double.parseDouble(mTravel.getPrice());
 //                                key = data.getKey();
 //                                keyList.add(key);
                             }
                         }
                         TravelAdapter travelAdapter = new TravelAdapter(travelList,MainActivity.this);
                         recyclerView.setAdapter(travelAdapter);
+
                     }
 
                     @Override
@@ -220,5 +238,20 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+
+    }
+
+    public String convert(Double prix,String init){
+        Double eurDoll = 0.810628967;
+        Double dollEuro = 1.2366;
+        Double resultat;
+
+        if (init.equals("EUR")){
+            resultat = prix * eurDoll;
+        }else{
+            resultat = prix * dollEuro;
+        }
+        String total = String .valueOf(resultat);
+        return total;
     }
 }

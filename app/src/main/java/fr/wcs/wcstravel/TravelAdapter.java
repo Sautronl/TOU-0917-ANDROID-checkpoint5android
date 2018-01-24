@@ -74,7 +74,7 @@ public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.ViewHolder
 //                    activity.startActivity(i);
 //                }
 //            });
-            resultComp.setText(travlWorld.getTravel());
+            resultComp.setText(travlWorld.getAirline());
             resultDateDep.setText(travlWorld.getDeparture_date());
             resultDateDes.setText(travlWorld.getReturn_date());
             resultPrice.setText(travlWorld.getPrice());

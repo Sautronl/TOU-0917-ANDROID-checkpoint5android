@@ -6,44 +6,59 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/resultComp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-         />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp">
 
-    <TextView
-        android:id="@+id/resultDateDep"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/resultCompList"
-        android:layout_marginTop="26dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="33dp" />
+        <TextView
+            android:id="@+id/resultComp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            />
 
-    <TextView
-        android:id="@+id/resultDateDes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/resultDateDep"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="45dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="63dp" />
+        <TextView
+            android:id="@+id/resultDateDep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/resultCompList"
+            android:layout_marginTop="26dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="33dp" />
 
-    <TextView
-        android:id="@+id/resultPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/resultDateDes"
-        android:layout_below="@+id/resultDateDes"
-        android:layout_marginTop="39dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="94dp" />
+        <TextView
+            android:id="@+id/resultDateDes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/resultDateDep"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="45dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="63dp" />
+
+        <TextView
+            android:id="@+id/resultPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/resultDateDes"
+            android:layout_below="@+id/resultDateDes"
+            />
+
+        <TextView
+            android:id="@+id/resultPriceConvert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="11dp"
+            android:layout_marginStart="37dp"
+            android:layout_toEndOf="@+id/resultPrice"
+            />
+
+    </RelativeLayout>
+
 
 </RelativeLayout>
